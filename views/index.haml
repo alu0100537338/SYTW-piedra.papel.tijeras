@@ -1,0 +1,20 @@
+require 'rack/request'
+require 'rack/response'
+require 'haml'
+
+module RockPaperScissors
+  class App 
+     ...
+
+    def call(env)
+      ...
+      engine = Haml::Engine.new File.open("views/index.haml").read
+      res = Rack::Response.new 
+      res.write engine.render({}, 
+        :answer => answer, 
+        :choose => @choose,
+        :throws => @throws)
+      res.finish
+    end # call
+  end   # App
+end
