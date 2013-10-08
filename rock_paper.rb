@@ -1,5 +1,6 @@
 require 'rack/request'
 require 'rack/response'
+require 'haml'
   
 module RockPaperScissors
   class App 
@@ -32,19 +33,7 @@ module RockPaperScissors
           "Ouch; #{computer_throw} beats #{player_throw}. Better luck next time!"
         end
 
-      res = Rack::Response.new
-      res.write <<-"EOS"
-      <html>
-        <title>rps</title>
-        <body>
-          <h1>
-             #{anwser}
-             #{@choose}
-          </h1>
-        </body>
-      </html>
-      EOS
-      res.finish
+      res = Rack::Response.new      
     end # call
   end   # App
 end     # RockPaperScissors
