@@ -1,4 +1,3 @@
-require 'rack'
 require 'rack/request'
 require 'rack/response'
 require 'haml'
@@ -11,7 +10,12 @@ module RockPaperScissors
       @content_type = :html
       @defeat = {'rock' => 'scissors', 'paper' => 'rock', 'scissors' => 'paper'}
       @throws = @defeat.keys
-     
+      
+    end
+
+    def haml(template, resultado)
+      template_file = File.open(template, 'r')
+      Haml::Engine.new(File.read(template_file)).render({},resultado)
     end
 
     def call(env)
@@ -30,8 +34,18 @@ module RockPaperScissors
         else
           "Ouch; #{computer_throw} beats #{player_throw}. Better luck next time!"
         end
-
-      res = Rack::Response.new      
+	
+	resultado = 
+		{
+		:choose => @choose,
+		:anwser => anwser,
+		:throws => @throws,
+		:computer_throw => computer_throw,
+		:player_throw => player_throw}
+      res = Rack::Response.new(haml("views/index.html.haml", resultado))
+     
     end # call
   end   # App
 end     # RockPaperScissors
+  
+
