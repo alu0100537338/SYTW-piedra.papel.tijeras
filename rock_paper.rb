@@ -1,3 +1,4 @@
+require 'rack'
 require 'rack/request'
 require 'rack/response'
 require 'haml'
@@ -10,10 +11,7 @@ module RockPaperScissors
       @content_type = :html
       @defeat = {'rock' => 'scissors', 'paper' => 'rock', 'scissors' => 'paper'}
       @throws = @defeat.keys
-      @choose = @throws.map { |x| 
-         %Q{ <li><a href="/?choice=#{x}">#{x}</a></li> }
-      }.join("\n")
-      @choose = "<p>\n<ul>\n#{@choose}\n</ul>"
+     
     end
 
     def call(env)
@@ -37,15 +35,3 @@ module RockPaperScissors
     end # call
   end   # App
 end     # RockPaperScissors
-  
-if $0 == __FILE__
-  require 'rack'
-  require 'rack/showexceptions'
-  Rack::Server.start(
-    :app => Rack::ShowExceptions.new(
-              Rack::Lint.new(
-                RockPaperScissors::App.new)), 
-    :Port => 9292,
-    :server => 'thin'
-  )
-end
