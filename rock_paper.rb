@@ -8,7 +8,7 @@ module RockPaperScissors
     def initialize(app = nil)
       @app = app
       @content_type = :html
-      @defeat = {'rock' => 'scissors', 'paper' => 'rock', 'scissors' => 'paper'}
+      @defeat = {'Piedra' => 'Tijeras', 'Papel' => 'Piedra', 'Tijeras' => 'Papel'}
       @throws = @defeat.keys
       
     end
@@ -25,20 +25,20 @@ module RockPaperScissors
 
       computer_throw = @throws.sample
       player_throw = req.GET["choice"]
-      anwser = if !@throws.include?(player_throw)
-          "Choose one of the following:"
+      answer = if !@throws.include?(player_throw)
+          "No olvides elegir elmento!"
         elsif player_throw == computer_throw
-          "You tied with the computer"
+          "Empate! It's something!"
         elsif computer_throw == @defeat[player_throw]
-          "Nicely done; #{player_throw} beats #{computer_throw}"
+          "Ganaste! #{player_throw} vence a #{computer_throw}! Bite the dust #{computer_throw}!"
         else
-          "Ouch; #{computer_throw} beats #{player_throw}. Better luck next time!"
+          "Oh no! #{computer_throw} vence a #{player_throw}! Try again, don't let #{computer_throw} win!"
         end
 	
 	resultado = 
 		{
 		:choose => @choose,
-		:anwser => anwser,
+		:answer => answer,
 		:throws => @throws,
 		:computer_throw => computer_throw,
 		:player_throw => player_throw}
