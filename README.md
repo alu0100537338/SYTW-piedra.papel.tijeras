@@ -26,6 +26,13 @@ Ejecucion
     Y por ultimo accederemos al servidor mediante la siguiente direccion:
     
         localhost:8080/
+  
+        
+Actualizacion
+-------------
+
+    Se ha añadido la carpeta 'public' donde se podra encontrar la hoja de
+    estilos añadida recientemente a la implementacion.
     
 ----------------------------------------
 Jessica A. Ramos Villarreal - ETSII-ULL
