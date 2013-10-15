@@ -2,14 +2,19 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html'}
-  %body
-    %h1 User choice
-    -throws.map do |x| 
-      %a{:href=>"/?choice=#{x}"} 
-        %button "#{x}"
-    %h1 Computer Choice
-    %h3=computer_throw
-    %h1 Resultado
-    %h2=answer
+    %title Juego: Piedra, papel, tijeras
+    %link{:href => "/public/style.css", :rel => "stylesheet"}
+  %body#global
+    %center
+      %h1#usuario Usuario
+      -throws.map do |x| 
+        %a{:href=>"/?choice=#{x}"}
+          %p
+          %button#boton #{x}
+          %p
+      %h1#ordenador Ordenador
+      %h3=computer_throw
+      %h1#resultado Resultado
+      %h2=answer
       
 
